@@ -1,8 +1,3 @@
----
-layout: default
-title: API参考
----
-
 # API参考
 
 本文档提供沙盒管理系统API的详细参考。系统提供RESTful API，返回JSON格式的数据。
@@ -12,7 +7,7 @@ title: API参考
 所有API请求都需要通过认证。请在HTTP请求头中添加API密钥：
 
 ```
-Authorization: Bearer <您的API密钥>
+X-API-KEY: <您的API密钥>
 ```
 
 ## 通用响应格式

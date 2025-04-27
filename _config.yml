@@ -31,4 +31,6 @@ sidebar:
   - name: 最佳实践
     link: best-practices.html
   - name: 故障排除
-    link: troubleshooting.html 
+    link: troubleshooting.html
+  - name: 沙盒实例
+    link: sandbox-instances.html 

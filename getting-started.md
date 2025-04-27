@@ -1,8 +1,3 @@
----
-layout: default
-title: 快速开始
----
-
 # 快速开始
 
 本文档将帮助您快速上手沙盒管理系统，包括获取API密钥、创建和管理沙盒实例等基本操作。
@@ -21,7 +16,7 @@ title: 快速开始
 所有API请求都需要在HTTP头部包含API密钥进行认证：
 
 ```
-Authorization: Bearer <您的API密钥>
+X-API-KEY: <您的API密钥>
 ```
 
 ## 创建沙盒实例
@@ -38,7 +33,7 @@ Authorization: Bearer <您的API密钥>
 POST /v1/sandboxes HTTP/1.1
 Host: api.sandbox-manager.example.com
 Content-Type: application/json
-Authorization: Bearer your-api-key
+X-API-KEY: your-api-key
 
 {
   "userId": "user123",

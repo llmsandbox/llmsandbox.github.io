@@ -1,8 +1,3 @@
----
-layout: default
-title: 核心概念
----
-
 # 核心概念
 
 ## 沙盒实例
@@ -13,23 +8,21 @@ title: 核心概念
 
 沙盒实例有以下几种状态：
 
-1. **CREATING**：沙盒正在创建中，EC2实例正在启动
-2. **INITIALIZING**：沙盒实例已创建，正在进行初始化配置
-3. **RUNNING**：沙盒正常运行中，可以访问
-4. **STOPPING**：沙盒正在停止中
-5. **STOPPED**：沙盒已停止，实例不再运行但数据保留
-6. **DELETING**：沙盒正在删除中
-7. **DELETED**：沙盒已删除
-8. **ERROR**：沙盒创建或运行过程中发生错误
+1. **PENDING**：沙盒正在创建中，包括EC2实例启动和初始化配置阶段
+2. **RUNNING**：沙盒正常运行中，可以访问
+3. **STOPPED**：沙盒已停止，实例不再运行但数据保留
+4. **TERMINATED**：沙盒已终止/删除
 
 生命周期转换图：
 
 ```
-CREATING -> INITIALIZING -> RUNNING -> STOPPING -> STOPPED -> DELETING -> DELETED
-    |             |            |          |          |
-    v             v            v          v          v
-  ERROR  <----- ERROR <----- ERROR <---- ERROR <-- ERROR
+PENDING -> RUNNING -> STOPPED -> TERMINATED
+    |         |         |
+    v         v         v
+  ERROR <-- ERROR <-- ERROR
 ```
+
+详细的沙盒生命周期时序图请参见[生命周期时序图文档](../design/lifecycle-diagrams.md)。
 
 ### 持久化
 
@@ -38,17 +31,6 @@ CREATING -> INITIALIZING -> RUNNING -> STOPPING -> STOPPED -> DELETING -> DELETE
 - **实例存储**：临时存储，实例停止后数据丢失
 - **EBS卷**：持久化存储，实例停止后数据保留
 - **快照**：在创建镜像时生成，用于保存实例状态
-
-### 监控
-
-系统提供以下监控指标：
-
-- CPU利用率
-- 内存使用情况
-- 磁盘I/O
-- 网络流量
-
-监控数据可通过API获取，便于集成到第三方监控系统。
 
 ### 资源管理
 
@@ -61,6 +43,8 @@ CREATING -> INITIALIZING -> RUNNING -> STOPPING -> STOPPED -> DELETING -> DELETE
 ## 实例模板
 
 实例模板（即镜像）是创建沙盒实例的蓝图，包含操作系统和预安装的软件。
+
+详细的镜像生命周期时序图请参见[生命周期时序图文档](../design/lifecycle-diagrams.md#镜像生命周期时序图)。
 
 ### 配置选项
 
