@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "zh-CN" }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    {% include head-custom.html %}
+    <style>
+      .container {
+        display: flex;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .sidebar {
+        width: 250px;
+        padding: 20px;
+        background-color: #f5f5f5;
+        border-right: 1px solid #ddd;
+      }
+      .sidebar h3 {
+        margin-top: 0;
+      }
+      .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      .sidebar li {
+        margin-bottom: 10px;
+      }
+      .sidebar a {
+        text-decoration: none;
+        color: #606c71;
+        display: block;
+        padding: 5px 10px;
+        border-radius: 4px;
+      }
+      .sidebar a:hover, .sidebar a.active {
+        background-color: #ddeeff;
+        color: #1e6bb8;
+      }
+      .main-content {
+        flex: 1;
+        padding: 40px;
+      }
+      @media screen and (max-width: 768px) {
+        .container {
+          flex-direction: column;
+        }
+        .sidebar {
+          width: 100%;
+          border-right: none;
+          border-bottom: 1px solid #ddd;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="page-header" role="banner">
+      <h1 class="project-name">{{ site.title }}</h1>
+      <h2 class="project-tagline">{{ site.description }}</h2>
+    </header>
+
+    <div class="container">
+      <div class="sidebar">
+        <h3>文档导航</h3>
+        <ul>
+          {% for item in site.sidebar %}
+          <li><a href="{{ item.link | relative_url }}" {% if page.url == item.link %}class="active"{% endif %}>{{ item.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="main-content">
+        {{ content }}
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <span class="site-footer-credits">© {{ site.time | date: '%Y' }} 沙盒管理系统. 保留所有权利.</span>
+    </footer>
+  </body>
+</html> 
