@@ -33,13 +33,13 @@ X-API-KEY: <您的API密钥>
 
 - **接口说明**: 创建新的沙盒实例
 - **HTTP方法**: POST
-- **请求路径**: `/v1/sandboxes`
+- **请求路径**: `/api/v1/sandboxes`
 - **请求体**: 
   ```json
   {
     "userId": "用户ID",
-    "mcpVersion": "1.0",
-    "imageId": "镜像ID",
+    "mcpVersion": "1.0(可选)",
+    "imageId": "镜像ID(可选)",
     "instanceSpecification": "实例规格，如1u1g（可选）"
   }
   ```
@@ -63,7 +63,7 @@ X-API-KEY: <您的API密钥>
 
 - **接口说明**: 获取沙盒列表
 - **HTTP方法**: GET
-- **请求路径**: `/v1/sandboxes`
+- **请求路径**: `/api/v1/sandboxes`
 - **请求参数**:
   - `userId`: 用户ID（可选）
   - `status`: 沙盒状态过滤（可选）
@@ -100,7 +100,7 @@ X-API-KEY: <您的API密钥>
 
 - **接口说明**: 获取沙盒详情
 - **HTTP方法**: GET
-- **请求路径**: `/v1/sandboxes/{sandboxId}`
+- **请求路径**: `/api/v1/sandboxes/{sandboxId}`
 - **路径参数**:
   - `sandboxId`: 沙盒ID
 - **响应**:
@@ -124,7 +124,7 @@ X-API-KEY: <您的API密钥>
 
 - **接口说明**: 停止沙盒
 - **HTTP方法**: POST
-- **请求路径**: `/v1/sandboxes/{sandboxId}/stop`
+- **请求路径**: `/api/v1/sandboxes/{sandboxId}/stop`
 - **路径参数**:
   - `sandboxId`: 沙盒ID
 - **响应**:
@@ -150,7 +150,7 @@ X-API-KEY: <您的API密钥>
 
 - **接口说明**: 获取沙盒状态
 - **HTTP方法**: GET
-- **请求路径**: `/v1/sandboxes/{sandboxId}/status`
+- **请求路径**: `/api/v1/sandboxes/{sandboxId}/status`
 - **路径参数**:
   - `sandboxId`: 沙盒ID
 - **响应**:
@@ -172,98 +172,13 @@ X-API-KEY: <您的API密钥>
   ```
 - **状态码**: 200 OK
 
-### 手动触发沙盒初始化
-
-- **接口说明**: 手动触发沙盒初始化
-- **HTTP方法**: POST
-- **请求路径**: `/v1/sandboxes/{sandboxId}/initialize`
-- **路径参数**:
-  - `sandboxId`: 沙盒ID
-- **请求体**:
-  ```json
-  {
-    "userId": "用户ID"
-  }
-  ```
-- **响应**:
-  ```json
-  {
-    "success": true,
-    "data": {
-      "success": true,
-      "message": "沙盒初始化已触发"
-    },
-    "timestamp": 1625097600000
-  }
-  ```
-- **状态码**: 200 OK
-
-### 删除沙盒
-
-- **接口说明**: 删除沙盒
-- **HTTP方法**: DELETE
-- **请求路径**: `/v1/sandboxes/{sandboxId}`
-- **路径参数**:
-  - `sandboxId`: 沙盒ID
-- **响应**:
-  ```json
-  {
-    "success": true,
-    "data": {
-      "sandboxId": "沙盒ID",
-      "message": "Sandbox deletion initiated successfully"
-    },
-    "timestamp": 1625097600000
-  }
-  ```
-- **状态码**: 200 OK
-
 ## 镜像管理
-
-### 基于沙盒实例创建镜像
-
-- **接口说明**: 基于沙盒实例创建镜像
-- **HTTP方法**: POST
-- **请求路径**: `/v1/sandbox-images/sandbox/{sandboxId}`
-- **路径参数**:
-  - `sandboxId`: 沙盒ID
-- **请求体**: 
-  ```json
-  {
-    "userId": "用户ID",
-    "name": "镜像名称",
-    "description": "镜像描述"
-  }
-  ```
-- **响应**:
-  ```json
-  {
-    "success": true,
-    "data": {
-      "imageId": "镜像ID",
-      "awsImageId": "AWS镜像ID",
-      "name": "镜像名称",
-      "description": "镜像描述",
-      "status": "镜像状态",
-      "sourceInstanceId": "源实例ID",
-      "sourceSandboxId": "源沙盒ID",
-      "userId": "用户ID",
-      "region": "区域",
-      "isDefault": false,
-      "storageSize": 8,
-      "createdAt": "2023-01-01T12:00:00",
-      "lastUpdated": "2023-01-01T12:00:00"
-    },
-    "timestamp": 1625097600000
-  }
-  ```
-- **状态码**: 201 Created
 
 ### 获取镜像列表
 
 - **接口说明**: 获取镜像列表
 - **HTTP方法**: GET
-- **请求路径**: `/v1/sandbox-images`
+- **请求路径**: `/api/v1/sandbox-images`
 - **请求参数**:
   - `userId`: 用户ID（必填）
   - `status`: 镜像状态过滤（可选）
@@ -304,7 +219,7 @@ X-API-KEY: <您的API密钥>
 
 - **接口说明**: 获取镜像详情
 - **HTTP方法**: GET
-- **请求路径**: `/v1/sandbox-images/{imageId}`
+- **请求路径**: `/api/v1/sandbox-images/{imageId}`
 - **路径参数**:
   - `imageId`: 镜像ID
 - **响应**:
@@ -335,7 +250,7 @@ X-API-KEY: <您的API密钥>
 
 - **接口说明**: 删除镜像
 - **HTTP方法**: POST
-- **请求路径**: `/v1/sandbox-images/{imageId}/delete`
+- **请求路径**: `/api/v1/sandbox-images/{imageId}/delete`
 - **路径参数**:
   - `imageId`: 镜像ID
 - **响应**:

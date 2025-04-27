@@ -30,8 +30,7 @@ X-API-KEY: <您的API密钥>
 ### 示例请求
 
 ```http
-POST /v1/sandboxes HTTP/1.1
-Host: api.sandbox-manager.example.com
+POST /api/v1/sandboxes HTTP/1.1
 Content-Type: application/json
 X-API-KEY: your-api-key
 
@@ -64,8 +63,7 @@ X-API-KEY: your-api-key
 
 1. **获取沙盒列表**：查看您创建的所有沙盒
 2. **查看沙盒详情**：获取特定沙盒的详细信息
-3. **停止沙盒**：暂停不需要使用的沙盒
-4. **删除沙盒**：销毁不再需要的沙盒
+3. **停止沙盒**：暂停并删除不需要使用的沙盒
 
 详细API使用方法请参考[API参考](api-reference.md)文档。
 
@@ -75,12 +73,8 @@ X-API-KEY: your-api-key
 
 请检查以下几点：
 - API密钥是否有效
-- 参数是否正确（特别是imageId）
+- 参数是否正确
 - 查看API响应中的错误信息
-
-### 如何选择合适的镜像？
-
-系统提供了默认镜像，您也可以通过[获取镜像列表API](api-reference.md#get-images)查看所有可用的镜像。
 
 ### 如何监控沙盒资源使用情况？
 
