@@ -35,9 +35,7 @@ Content-Type: application/json
 X-API-KEY: your-api-key
 
 {
-  "userId": "user123",
-  "mcpVersion": "1.0",
-  "imageId": "img-default"
+  "userId": "user123"
 }
 ```
 
@@ -47,10 +45,10 @@ X-API-KEY: your-api-key
 {
   "success": true,
   "data": {
-    "sandboxId": "sb-1234567890",
-    "mcpUrl": "https://mcp.example.com/sb-1234567890",
-    "vncUrl": "https://vnc.example.com/sb-1234567890",
-    "cdpUrl": "https://cdp.example.com/sb-1234567890",
+    "sandboxId": "instance-xxxxx",
+    "mcpUrl": "https://mcp.example.com/xxxx",
+    "vncUrl": "https://vnc.example.com/xxxx",
+    "cdpUrl": "https://cdp.example.com/xxxx",
     "status": "CREATING"
   },
   "timestamp": 1625097600000
@@ -78,4 +76,4 @@ X-API-KEY: your-api-key
 
 ### 如何监控沙盒资源使用情况？
 
-您可以通过[获取沙盒状态API](api-reference.md#get-sandbox-status)查看沙盒的基本状态，或者使用专门的监控API获取更详细的资源使用情况。 
+您可以通过[获取沙盒状态API](api-reference.md#get-sandbox-status)查看沙盒的基本状态

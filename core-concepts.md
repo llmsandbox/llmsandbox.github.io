@@ -15,11 +15,14 @@
 
 生命周期转换图：
 
-```
-PENDING -> RUNNING -> STOPPED -> TERMINATED
-    |         |         |
-    v         v         v
-  ERROR <-- ERROR <-- ERROR
+```mermaid
+graph TD
+    PENDING --> RUNNING
+    RUNNING --> STOPPED
+    STOPPED --> TERMINATED
+    PENDING --> ERROR
+    RUNNING --> ERROR
+    STOPPED --> ERROR
 ```
 
 ### 沙盒操作时序
@@ -51,7 +54,7 @@ sequenceDiagram
         沙盒服务-->>用户: 返回沙盒状态 (Ready) 及连接信息
         deactivate 沙盒服务
     end
-    用户-->> 用户: 保存用户和沙盒的关系
+    用户-->>用户: 保存用户和沙盒的关系
 
 
     loop MCP调用
@@ -73,7 +76,7 @@ sequenceDiagram
     deactivate AWS EC2
     沙盒服务-->>用户: 返回停止成功 (镜像ID)
     deactivate 沙盒服务
-    用户-->> 用户: 保存用户和镜像的关系
+    用户-->>用户: 保存用户和镜像的关系
 ```
 
 ### 自定义CPU和内存

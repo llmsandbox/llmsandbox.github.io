@@ -1,3 +1,16 @@
 <!-- 自定义头部 -->
 <title>{{ site.title }}</title>
-<meta name="description" content="{{ site.description }}"> 
+<meta name="description" content="{{ site.description }}">
+
+<!-- Mermaid.js 支持 -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      securityLevel: 'loose',
+      flowchart: { useMaxWidth: true, htmlLabels: true }
+    });
+  });
+</script> 
