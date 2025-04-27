@@ -28,6 +28,7 @@ graph TD
 ### 沙盒操作时序
 
 ```mermaid
+
 sequenceDiagram
     participant 用户
     participant 沙盒服务
