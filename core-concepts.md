@@ -10,50 +10,67 @@
 
 1. **PENDING**：沙盒正在创建中，包括EC2实例启动和初始化配置阶段
 2. **RUNNING**：沙盒正常运行中，可以访问
-3. **STOPPED**：沙盒已停止，实例不再运行但数据保留
-4. **TERMINATED**：沙盒已终止/删除
+3. **STOPPED/TERMINATED**：沙盒已终止/删除
 
 生命周期转换图：
 
 ```
 PENDING -> RUNNING -> STOPPED -> TERMINATED
-    |         |         |
-    v         v         v
-  ERROR <-- ERROR <-- ERROR
 ```
 
-详细的沙盒生命周期时序图请参见[生命周期时序图文档](../design/lifecycle-diagrams.md)。
+### 沙盒操作时序
 
-### 持久化
+```mermaid
+sequenceDiagram
+    participant 用户
+    participant 沙盒服务
+    participant AWS EC2
 
-沙盒实例使用以下存储方式：
+    用户->>沙盒服务: 请求创建沙盒
+    activate 沙盒服务
+    沙盒服务->>AWS EC2: 调用 RunInstances API 创建EC2实例
+    activate AWS EC2
+    AWS EC2-->>沙盒服务: 返回实例信息 (Instance ID)
+    deactivate AWS EC2
+    沙盒服务-->>用户: 返回沙盒ID
+    deactivate 沙盒服务
 
-- **实例存储**：临时存储，实例停止后数据丢失
-- **EBS卷**：持久化存储，实例停止后数据保留
-- **快照**：在创建镜像时生成，用于保存实例状态
+    Note right of AWS EC2: EC2 实例启动和初始化...
 
-### 资源管理
+    loop
+        用户->>沙盒服务: 查询沙盒状态
+        activate 沙盒服务
+        沙盒服务->>AWS EC2: 查询实例状态
+        activate AWS EC2
+        AWS EC2-->>沙盒服务: 返回实例状态 (Running, IP地址等)
+        deactivate AWS EC2
+        沙盒服务-->>用户: 返回沙盒状态 (Ready) 及连接信息
+        deactivate 沙盒服务
+    end
+    用户-->> 用户: 保存用户和沙盒的关系
 
-沙盒实例的资源管理主要包括：
 
-- **计算资源**：CPU核心数和内存大小
-- **存储资源**：磁盘空间和I/O性能
-- **网络资源**：带宽和公网IP
+    loop MCP调用
+        用户->>AWS EC2: 执行命令
+        activate AWS EC2
 
-## 实例模板
+        AWS EC2-->>用户: 返回操作结果
+        deactivate AWS EC2
+    end
 
-实例模板（即镜像）是创建沙盒实例的蓝图，包含操作系统和预安装的软件。
 
-详细的镜像生命周期时序图请参见[生命周期时序图文档](../design/lifecycle-diagrams.md#镜像生命周期时序图)。
-
-### 配置选项
-
-镜像配置包括以下核心要素：
-
-- **基础镜像**：操作系统和基础软件包
-- **预装软件**：开发工具、服务组件等
-- **配置文件**：系统和应用配置
-- **初始化脚本**：首次启动时执行的脚本
+    用户->>沙盒服务: 请求停止沙盒
+    activate 沙盒服务
+    沙盒服务->>AWS EC2: 调用 停止实例 API
+    activate AWS EC2
+    AWS EC2-->>沙盒服务: 确认实例已停止
+    沙盒服务->>AWS EC2: 调用 创建镜像 API
+    AWS EC2-->>沙盒服务: 镜像创建成功
+    deactivate AWS EC2
+    沙盒服务-->>用户: 返回停止成功 (镜像ID)
+    deactivate 沙盒服务
+    用户-->> 用户: 保存用户和镜像的关系
+```
 
 ### 自定义CPU和内存
 
@@ -65,14 +82,32 @@ PENDING -> RUNNING -> STOPPED -> TERMINATED
 通过`instanceSpecification`参数指定，格式为`{CPU核心数}u{内存GB数}g`，例如：
 - `1u1g`：1核心1GB内存
 - `2u4g`：2核心4GB内存
+ 
 
-### 初始化脚本
 
-初始化脚本在沙盒实例首次启动时执行，用于：
+### 持久化
 
-- 配置系统环境
-- 启动应用服务
-- 准备开发环境
-- 加载数据
+沙盒实例使用以下存储方式：
 
-初始化脚本可以通过镜像预设，也可以在创建沙盒时通过配置参数提供。 
+- **快照**：在创建镜像时生成，用于保存实例状态
+
+
+## 镜像
+
+镜像是创建沙盒实例的蓝图，包含操作系统和预安装的软件。用户需对镜像做管理
+
+### 镜像操作时序
+```mermaid
+sequenceDiagram
+    participant 用户
+    participant 沙盒服务
+    participant AWS EC2
+    用户->>沙盒服务: 请求删除镜像
+    activate 沙盒服务
+    沙盒服务->>AWS EC2: 调用 删除镜像 API
+    activate AWS EC2
+    AWS EC2-->>沙盒服务: 确认镜像已删除
+    deactivate AWS EC2
+    沙盒服务-->>用户: 返回删除镜像成功
+    deactivate 沙盒服务
+``` 

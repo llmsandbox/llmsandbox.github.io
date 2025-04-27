@@ -45,6 +45,13 @@
         background-color: #ddeeff;
         color: #1e6bb8;
       }
+      .sidebar ul ul {
+        margin-left: 15px;
+        margin-top: 5px;
+      }
+      .sidebar ul ul li {
+        margin-bottom: 5px;
+      }
       .main-content {
         flex: 1;
         padding: 40px;
@@ -74,7 +81,18 @@
         <h3>文档导航</h3>
         <ul>
           {% for item in site.sidebar %}
-          <li><a href="{{ item.link | relative_url }}" {% if page.url contains item.link %}class="active"{% endif %}>{{ item.name }}</a></li>
+          <li>
+            {% if item.children %}
+              <a href="{{ item.link | relative_url }}" {% if page.url contains item.link %}class="active"{% endif %}>{{ item.name }}</a>
+              <ul>
+                {% for child in item.children %}
+                <li><a href="{{ child.link | relative_url }}" {% if page.url contains child.link %}class="active"{% endif %}>{{ child.name }}</a></li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <a href="{{ item.link | relative_url }}" {% if page.url contains item.link %}class="active"{% endif %}>{{ item.name }}</a>
+            {% endif %}
+          </li>
           {% endfor %}
         </ul>
       </div>
