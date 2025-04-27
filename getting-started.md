@@ -23,7 +23,7 @@ X-API-KEY: <您的API密钥>
 
 ### 基本步骤
 
-1. 准备创建沙盒的必要参数：用户ID、MCP版本、镜像ID等
+1. 准备创建沙盒的必要参数
 2. 调用创建沙盒API
 3. 等待沙盒创建完成并获取沙盒访问URL
 
@@ -49,7 +49,7 @@ X-API-KEY: your-api-key
     "mcpUrl": "https://mcp.example.com/xxxx",
     "vncUrl": "https://vnc.example.com/xxxx",
     "cdpUrl": "https://cdp.example.com/xxxx",
-    "status": "CREATING"
+    "status": "PENDING"
   },
   "timestamp": 1625097600000
 }
