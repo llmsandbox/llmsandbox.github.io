@@ -111,7 +111,6 @@ Browser-Use是一个高级浏览器自动化库，可以与CDP端点集成，提
 ### Browser-Use集成示例
 
 ```python
-
 import asyncio
 
 from browser_use import BrowserContextConfig, Browser, Agent, BrowserConfig
@@ -154,4 +153,4 @@ async def run():
 
 if __name__ == '__main__':
     asyncio.run(run())
-
+```
