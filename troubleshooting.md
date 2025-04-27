@@ -59,45 +59,6 @@
 - `404`: 资源不存在
 - `500`: 服务器内部错误
 
-### 沙盒管理特定错误
-
-- `SB-001`: 镜像ID不存在
-- `SB-002`: 创建EC2实例失败
-- `SB-003`: 初始化过程失败
-- `SB-004`: 沙盒资源配额超限
-- `SB-005`: 沙盒已存在
-- `SB-006`: 实例规格不支持
-
-### 镜像管理特定错误
-
-- `IMG-001`: 源沙盒状态不正确
-- `IMG-002`: 创建AMI失败
-- `IMG-003`: 镜像名称已存在
-- `IMG-004`: 镜像创建超时
-- `IMG-005`: 用户镜像配额超限
-
-## 日志分析
-
-系统日志是定位和解决问题的有效工具。以下是关键日志及其分析方法：
-
-### 系统日志
-
-系统运行日志记录了API调用、资源创建等重要信息。对应的日志位于：
-- 沙盒创建日志：`/var/log/sandboxmanager/sandbox-creation.log`
-- API请求日志：`/var/log/sandboxmanager/api-requests.log`
-- 错误日志：`/var/log/sandboxmanager/error.log`
-
-常见日志分析工具：
-- 使用grep过滤关键信息：`grep "ERROR" /var/log/sandboxmanager/error.log`
-- 使用tail实时查看日志：`tail -f /var/log/sandboxmanager/sandbox-creation.log`
-
-### 沙盒实例日志
-
-沙盒实例内部的日志对排查初始化和运行问题很有帮助：
-- 系统日志：`/var/log/syslog`
-- 初始化脚本日志：`/var/log/cloud-init-output.log`
-- 应用服务日志：`/var/log/application/`
-
 ## 联系支持
 
 如果您无法解决问题，请联系技术支持团队获取帮助。
@@ -113,6 +74,4 @@
 
 ### 联系方式
 
-- 电子邮件：support@sandbox-manager.example.com
-- 支持热线：+86-10-88888888
-- 服务时间：工作日 9:00-18:00 
+- 电子邮件：

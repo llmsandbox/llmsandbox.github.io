@@ -27,17 +27,17 @@ sidebar:
   - name: 核心概念
     link: core-concepts.html
   - name: API参考
-    link: api-reference.html
+  link: api-reference.html
+  - name: 沙盒实例
+  link: sandbox-instances.html
+  children:
+    - name: MCP工具
+      link: instance/mcp.html
+    - name: CDP实例
+      link: instance/cdp.html
+    - name: VNC实例
+      link: instance/vnc.html 
   - name: 最佳实践
     link: best-practices.html
   - name: 故障排除
     link: troubleshooting.html
-  - name: 沙盒实例
-    link: sandbox-instances.html
-    children:
-      - name: MCP工具
-        link: instance/mcp.html
-      - name: CDP实例
-        link: instance/cdp.html
-      - name: VNC实例
-        link: instance/vnc.html 

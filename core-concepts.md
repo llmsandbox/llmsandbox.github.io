@@ -11,11 +11,15 @@
 1. **PENDING**：沙盒正在创建中，包括EC2实例启动和初始化配置阶段
 2. **RUNNING**：沙盒正常运行中，可以访问
 3. **STOPPED/TERMINATED**：沙盒已终止/删除
+4. **ERROR**: 实例异常
 
 生命周期转换图：
 
 ```
 PENDING -> RUNNING -> STOPPED -> TERMINATED
+    |         |         |
+    v         v         v
+  ERROR <-- ERROR <-- ERROR
 ```
 
 ### 沙盒操作时序
@@ -84,7 +88,6 @@ sequenceDiagram
 - `2u4g`：2核心4GB内存
  
 
-
 ### 持久化
 
 沙盒实例使用以下存储方式：
@@ -94,7 +97,7 @@ sequenceDiagram
 
 ## 镜像
 
-镜像是创建沙盒实例的蓝图，包含操作系统和预安装的软件。用户需对镜像做管理
+镜像是创建沙盒实例的蓝图，包含操作系统和预安装的软件。
 
 ### 镜像操作时序
 ```mermaid
