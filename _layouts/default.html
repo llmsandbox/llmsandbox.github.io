@@ -8,10 +8,14 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     {% include head-custom.html %}
     <style>
+      .page-header {
+        padding: 2rem 1rem;
+      }
       .container {
         display: flex;
         max-width: 1200px;
         margin: 0 auto;
+        background: #fff;
       }
       .sidebar {
         width: 250px;
@@ -25,6 +29,7 @@
       .sidebar ul {
         list-style-type: none;
         padding: 0;
+        margin: 0;
       }
       .sidebar li {
         margin-bottom: 10px;
@@ -43,6 +48,8 @@
       .main-content {
         flex: 1;
         padding: 40px;
+        margin: 0;
+        max-width: none;
       }
       @media screen and (max-width: 768px) {
         .container {
@@ -58,7 +65,7 @@
   </head>
   <body>
     <header class="page-header" role="banner">
-      <h1 class="project-name">{{ site.title }}</h1>
+      <h1 class="project-name">{{ page.title | default: site.title }}</h1>
       <h2 class="project-tagline">{{ site.description }}</h2>
     </header>
 
@@ -67,7 +74,7 @@
         <h3>文档导航</h3>
         <ul>
           {% for item in site.sidebar %}
-          <li><a href="{{ item.link | relative_url }}" {% if page.url == item.link %}class="active"{% endif %}>{{ item.name }}</a></li>
+          <li><a href="{{ item.link | relative_url }}" {% if page.url contains item.link %}class="active"{% endif %}>{{ item.name }}</a></li>
           {% endfor %}
         </ul>
       </div>

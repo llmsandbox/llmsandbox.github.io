@@ -1,8 +1,10 @@
 title: 沙盒管理系统
 description: 沙盒管理系统官方文档
 theme: jekyll-theme-cayman
+remote_theme: pages-themes/cayman@v0.2.0
 
 plugins:
+  - jekyll-remote-theme
   - jekyll-relative-links
 
 relative_links:
@@ -14,16 +16,19 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
   
+github:
+  is_project_page: false
+  
 sidebar:
   - name: 系统概述
-    link: overview.md
+    link: overview.html
   - name: 快速开始
-    link: getting-started.md
+    link: getting-started.html
   - name: 核心概念
-    link: core-concepts.md
+    link: core-concepts.html
   - name: API参考
-    link: api-reference.md
+    link: api-reference.html
   - name: 最佳实践
-    link: best-practices.md
+    link: best-practices.html
   - name: 故障排除
-    link: troubleshooting.md 
+    link: troubleshooting.html 

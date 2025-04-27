@@ -1,3 +1,8 @@
+---
+layout: default
+title: API参考
+---
+
 # API参考
 
 本文档提供沙盒管理系统API的详细参考。系统提供RESTful API，返回JSON格式的数据。
