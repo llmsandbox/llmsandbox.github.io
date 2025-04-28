@@ -87,8 +87,8 @@ sequenceDiagram
 - **CPU**：可选择不同核心数量
 - **内存**：可选择不同内存大小
 
-通过`instanceSpecification`参数指定，格式为`{CPU核心数}u{内存GB数}g`，例如：
-- `1u1g`：1核心1GB内存
+通过`instanceSpecification`参数指定，格式为`{CPU核心数}u{内存GB数}g
+- `1u1g`(默认)：1核心1GB内存 
 - `2u4g`：2核心4GB内存
  
 

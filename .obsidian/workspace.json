@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "api-reference.md",
+                "file": "core-concepts.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "api-reference"
+              "title": "core-concepts"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "api-reference.md",
+                "file": "core-concepts.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for api-reference"
+              "title": "Backlinks for core-concepts"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "api-reference.md",
+                "file": "core-concepts.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from api-reference"
+              "title": "Outgoing links from core-concepts"
             }
           },
           {
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "api-reference.md",
+                "file": "core-concepts.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of api-reference"
+              "title": "Outline of core-concepts"
             }
           }
         ]
@@ -170,8 +170,8 @@
   },
   "active": "d6869d7c998bef3e",
   "lastOpenFiles": [
-    "core-concepts.md",
     "api-reference.md",
+    "core-concepts.md",
     "instance/mcp.md",
     "getting-started.md",
     "best-practices.md",
