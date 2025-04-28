@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "api-reference.md",
+                "file": "instance/mcp.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "api-reference"
+              "title": "mcp"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "api-reference.md",
+                "file": "instance/mcp.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for api-reference"
+              "title": "Backlinks for mcp"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "api-reference.md",
+                "file": "instance/mcp.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from api-reference"
+              "title": "Outgoing links from mcp"
             }
           },
           {
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "api-reference.md",
+                "file": "instance/mcp.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of api-reference"
+              "title": "Outline of mcp"
             }
           }
         ]
@@ -170,10 +170,10 @@
   },
   "active": "d6869d7c998bef3e",
   "lastOpenFiles": [
+    "api-reference.md",
     "getting-started.md",
     "core-concepts.md",
     "best-practices.md",
-    "api-reference.md",
     "instance/mcp.md",
     "instance/cdp.md",
     "Pasted image 20250427154953.png",

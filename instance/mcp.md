@@ -458,7 +458,7 @@ async def fetch_tools_and_run_command(base_url: str = "http://localhost:8866", t
                 "test-server": {  
                     "url": f"{base_url}/sse",  
                     "env": {  
-                        "tiken": token  
+                        "token": token  
                     }  
                 }  
             }  
