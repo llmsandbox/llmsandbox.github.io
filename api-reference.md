@@ -39,7 +39,7 @@ X-API-KEY: <您的API密钥>
   {
     "userId": "用户ID",
     "mcpVersion": "1.0(可选)",
-    "imageId": "镜像ID(可选)",
+    "imageId": "镜像ID(可选) , 只有当镜像状态是AVAILABLE镜像才可用",
     "instanceSpecification": "实例规格，如1u1g（可选）"
   }
   ```
