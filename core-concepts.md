@@ -90,7 +90,17 @@ sequenceDiagram
 通过`instanceSpecification`参数指定，格式为`{CPU核心数}u{内存GB数}g
 - `1u1g`(默认)：1核心1GB内存 
 - `2u4g`：2核心4GB内存
- 
+
+
+| 实例类型       | 费用         | vCPU | 内存    | 存储               | 网络性能    |
+| ---------- | ---------- | ---- | ----- | ---------------- | ------- |
+| t2.micro   | USD 0.0116 | 1    | 1GiB  | 仅限 EBS           | 低到中等    |
+| t2.small   | USD 0.023  | 1    | 2GiB  | 仅限 EBS           | 低到中等    |
+| t2.medium  | USD 0.0464 | 2    | 4GiB  | 仅限 EBS           | 低到中等    |
+| t2.large   | USD 0.0928 | 2    | 8GiB  | 仅限 EBS           | 低到中等    |
+| t2.xlarge  | USD 0.1856 | 4    | 16GiB | 仅限 EBS           | 中等      |
+| t2.2xlarge | USD 0.3712 | 8    | 32GiB | 仅限 EBS           | 中等      |
+| m5d.xlarge | USD 0.226  | 4    | 16GiB | 1 个 150 NVMe SSD | 高达 10GB |
 
 ### 持久化
 
