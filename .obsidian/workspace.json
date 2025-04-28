@@ -11,12 +11,14 @@
             "id": "d6869d7c998bef3e",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "Pasted image 20250427154953.png"
+                "file": "api-reference.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "Pasted image 20250427154953"
+              "icon": "lucide-file",
+              "title": "api-reference"
             }
           }
         ]
@@ -92,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Pasted image 20250427154953.png",
+                "file": "api-reference.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Pasted image 20250427154953"
+              "title": "Backlinks for api-reference"
             }
           },
           {
@@ -111,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Pasted image 20250427154953.png",
+                "file": "api-reference.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Pasted image 20250427154953"
+              "title": "Outgoing links from api-reference"
             }
           },
           {
@@ -140,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Pasted image 20250427154953.png",
+                "file": "api-reference.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Pasted image 20250427154953"
+              "title": "Outline of api-reference"
             }
           }
         ]
@@ -168,19 +170,19 @@
   },
   "active": "d6869d7c998bef3e",
   "lastOpenFiles": [
+    "getting-started.md",
+    "core-concepts.md",
+    "best-practices.md",
+    "api-reference.md",
+    "instance/mcp.md",
+    "instance/cdp.md",
+    "Pasted image 20250427154953.png",
     "_config.yml.new",
     "sandbox-instances.md",
     "Pasted image 20250427154954.png",
-    "Pasted image 20250427154953.png",
     "index.md",
-    "api-reference.md",
-    "best-practices.md",
-    "instance/cdp.md",
-    "instance/mcp.md",
     "instance/vnc.md",
     "instance/README.md",
-    "core-concepts.md",
-    "getting-started.md",
     "design/lifecycle-diagrams.md",
     "instance",
     "mcp",
