@@ -154,3 +154,270 @@ async def run():
 if __name__ == '__main__':
     asyncio.run(run())
 ```
+
+
+## DEMO
+### X 登录
+
+```python
+from playwright.sync_api import sync_playwright, Browser, Page, BrowserContext  
+import time  
+import requests  
+import json  
+import os  
+  
+# X.com登录信息  
+  
+USERNAME = "" 
+PASSWORD = ""          
+PHONEOREMAIL = ""  
+TWOFACODE = ""  
+  
+# cookies文件路径  
+COOKIES_FILE = f"test/{USERNAME}_x_cookies.json"  
+  
+def get_2fa_code():  
+    """获取2FA验证码"""  
+    url = "https://www.henduohao.com/tools/twofaGet"  
+    headers = {  
+        'accept': 'application/json, text/javascript, */*; q=0.01',  
+        'accept-language': 'zh-CN,zh;q=0.9',  
+        'cache-control': 'no-cache',  
+        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',  
+        'origin': 'https://www.henduohao.com',  
+        'pragma': 'no-cache',  
+        'referer': 'https://www.henduohao.com/tools/twofa',  
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36',  
+        'x-requested-with': 'XMLHttpRequest'  
+    }  
+    data = {'twoFaCode': TWOFACODE}  
+      
+    try:  
+        response = requests.post(url, headers=headers, data=data)  
+        response_data = response.json()  
+        if response_data['code'] == 0:  
+            return response_data['data']  
+        else:  
+            print(f"获取2FA验证码失败: {response_data['msg']}")  
+            return None  
+    except Exception as e:  
+        print(f"获取2FA验证码时发生错误: {e}")  
+        return None  
+  
+def save_cookies(context):  
+    """保存浏览器上下文的cookies到本地文件"""  
+    cookies = context.cookies()  
+    os.makedirs(os.path.dirname(COOKIES_FILE), exist_ok=True)  
+    with open(COOKIES_FILE, 'w', encoding='utf-8') as f:  
+        json.dump(cookies, f, ensure_ascii=False, indent=2)  
+    print(f"cookies已保存到: {COOKIES_FILE}")  
+  
+def load_cookies(context, url="https://x.com"):  
+    """从本地文件加载cookies到浏览器上下文"""  
+    if not os.path.exists(COOKIES_FILE):  
+        print(f"未找到cookies文件: {COOKIES_FILE}")  
+        return False  
+        try:  
+        with open(COOKIES_FILE, 'r', encoding='utf-8') as f:  
+            cookies = json.load(f)  
+        context.add_cookies(cookies)  
+        print(f"成功加载cookies")  
+        return True  
+    except Exception as e:  
+        print(f"加载cookies失败: {e}")  
+        return False  
+  
+def login_with_cookies(cdp_url):  
+    """使用已保存的cookies登录X.com"""  
+    with sync_playwright() as playwright:  
+        # 连接到已存在的Chrome实例  
+        browser = playwright.chromium.connect_over_cdp(cdp_url)  
+          
+        # 获取浏览器的第一个上下文  
+        default_context = browser.contexts[0]  
+          
+        # 获取上下文中的第一个页面  
+        page = default_context.pages[0]  
+          
+        # 尝试加载cookies  
+        cookies_loaded = load_cookies(default_context)  
+          
+        # 访问X.com  
+        print("正在访问X.com...")  
+        page.goto("https://x.com/")  
+        time.sleep(2)  # 等待页面加载  
+        # 检查是否已经登录  
+        if "登录" in page.content() or "Sign in" in page.content():  
+            print("cookies登录失败，尝试重新登录...")  
+            login_x()  
+        else:  
+            print("使用cookies成功登录X.com")  
+              
+            # 打印页面标题和URL  
+            print(f'当前页面: {page.title()}')  
+            print(f'当前URL: {page.url}')  
+  
+            # 截图保存  
+            print("正在保存页面截图...")  
+            page.screenshot(path="test/x_login_with_cookies_screenshot.png")  
+              
+            # 等待一段时间以便观察  
+            time.sleep(3)  
+            print("使用cookies登录测试完成")  
+  
+def login_x(cdp_url):  
+    with sync_playwright() as playwright:  
+        # 连接到已存在的Chrome实例  
+        browser = playwright.chromium.connect_over_cdp(  
+            cdp_url)  
+  
+        # 获取浏览器的第一个上下文  
+        default_context = browser.contexts[0]  
+  
+        # 获取上下文中的第一个页面  
+        page = default_context.pages[0]  
+  
+        # 访问X.com  
+        print("正在访问X.com...")  
+        page.goto("https://x.com/")  
+        time.sleep(2)  # 等待页面加载  
+  
+        # 检查是否已经登录  
+        if "登录" in page.content() or "Sign in" in page.content():  
+            print("准备登录X.com...")  
+  
+            # 点击登录按钮  
+            page.click('a[href="/login"]')  
+            time.sleep(2)  # 等待登录页面加载  
+  
+            # 输入用户名  
+            print("正在输入用户名...")  
+            page.fill('input[autocomplete="username"]', USERNAME)  
+            page.press('input[autocomplete="username"]', 'Enter')  
+            time.sleep(2)  # 等待下一步加载  
+  
+            # 可能需要处理电话验证步骤  
+            if "phone number" in page.content():  
+                print("检测到需要验证电话，正在处理...")  
+                # 如果有电话号码输入框，则输入  
+                if page.query_selector('input[data-testid="ocfEnterTextTextInput"]'):  
+                    page.fill('input[data-testid="ocfEnterTextTextInput"]', PHONEOREMAIL)  
+                    # page.click('div[data-testid="ocfEnterTextNextButton"]')  
+                    page.click('button:has-text("Next")')  
+                    time.sleep(2)  
+  
+            # 输入密码  
+            print("正在输入密码...")  
+            page.fill('input[autocomplete="current-password"]', PASSWORD)  
+            time.sleep(2)  
+  
+            # 尝试多种方式定位登录按钮  
+            print("尝试点击登录按钮...")  
+              
+            # 方法1：等待登录按钮出现，最长等待10秒  
+            try:  
+                page.wait_for_selector('div[data-testid="LoginForm_Login_Button"]', timeout=10000)  
+                print("找到登录按钮，尝试点击")  
+            except Exception as e:  
+                print(f"等待登录按钮超时: {e}")  
+              
+            # 方法2：打印页面内容，帮助调试  
+            button_text = page.evaluate('''() => {  
+                // 尝试查找所有可能的登录按钮  
+                const buttons = Array.from(document.querySelectorAll('button')).filter(b =>                    b.textContent.includes('Log in') ||   
+                    b.textContent.includes('Sign in') ||   
+                    b.textContent.includes('登录')  
+                );                return buttons.map(b => ({text: b.textContent, html: b.outerHTML}));            }''')  
+            print(f"找到的可能登录按钮: {button_text}")  
+              
+            # 方法3：尝试多种选择器  
+            login_selectors = [  
+                'button:has-text("Log in")',  
+                'button:has-text("Sign in")',  
+                'button:has-text("登录")'  
+            ]  
+              
+            for selector in login_selectors:  
+                if page.query_selector(selector):  
+                    print(f"尝试点击选择器: {selector}")  
+                    try:  
+                        page.click(selector)  
+                        print(f"成功点击: {selector}")  
+                        break  
+                    except Exception as e:  
+                        print(f"点击 {selector} 失败: {e}")  
+              
+            time.sleep(5)  # 等待登录完成  
+            # 检查是否需要2FA验证  
+            if "verification code" in page.content().lower() or "验证码" in page.content():  
+                print("检测到需要2FA验证，正在获取验证码...")  
+                verification_code = get_2fa_code()  
+                  
+                if verification_code:  
+                    print(f"获取到2FA验证码: {verification_code}")  
+                    # 尝试定位2FA输入框  
+                    verification_selectors = [  
+                        'input[autocomplete="one-time-code"]',  
+                        'input[name="verfication_code"]',  
+                        'input[placeholder*="code"]',  
+                        'input[data-testid="ocfEnterTextTextInput"]'  
+                    ]  
+                      
+                    for selector in verification_selectors:  
+                        if page.query_selector(selector):  
+                            print(f"找到2FA输入框: {selector}")  
+                            page.fill(selector, verification_code)  
+                            break  
+                    # 尝试点击验证按钮  
+                    verification_button_selectors = [  
+                        'button:has-text("Verify")',  
+                        'button:has-text("Next")',  
+                        'button:has-text("确认")',  
+                        'button:has-text("验证")'  
+                    ]  
+                      
+                    for selector in verification_button_selectors:  
+                        if page.query_selector(selector):  
+                            print(f"点击验证按钮: {selector}")  
+                            page.click(selector)  
+                            break  
+                    time.sleep(5)  # 等待验证完成  
+                else:  
+                    print("未能获取2FA验证码，登录可能会失败")  
+  
+            time.sleep(5)  
+            # 验证是否登录成功  
+            if "home" in page.url:  
+                print("登录成功！")  
+                # 保存cookies到本地  
+                save_cookies(default_context)  
+            else:  
+                print("登录失败，请检查用户名和密码是否正确。")  
+                # 打印当前URL和页面标题，帮助调试  
+                print(f"当前URL: {page.url}")  
+                print(f"页面标题: {page.title()}")  
+                save_cookies(default_context)  
+        else:  
+            print("已经登录X.com")  
+            # 保存cookies到本地  
+            save_cookies(default_context)  
+  
+        # 打印页面标题和URL  
+        print(f'当前页面: {page.title()}')  
+        print(f'当前URL: {page.url}')  
+  
+        # 截图保存  
+        print("正在保存页面截图...")  
+        page.screenshot(path="test/x_login_screenshot.png")  
+  
+        # 等待一段时间以便观察  
+        time.sleep(3)  
+        print("测试完成")  
+  
+  
+if __name__ == '__main__':  
+    cdp_url = ''  
+    login_x(cdp_url)  
+    # 尝试使用cookies登录  
+    # login_with_cookies(cdp_url)
+```

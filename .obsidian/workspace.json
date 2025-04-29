@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "core-concepts.md",
+                "file": "instance/cdp.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "core-concepts"
+              "title": "cdp"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "core-concepts.md",
+                "file": "instance/cdp.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for core-concepts"
+              "title": "Backlinks for cdp"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "core-concepts.md",
+                "file": "instance/cdp.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from core-concepts"
+              "title": "Outgoing links from cdp"
             }
           },
           {
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "core-concepts.md",
+                "file": "instance/cdp.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of core-concepts"
+              "title": "Outline of cdp"
             }
           }
         ]
@@ -170,12 +170,12 @@
   },
   "active": "d6869d7c998bef3e",
   "lastOpenFiles": [
-    "api-reference.md",
-    "core-concepts.md",
     "instance/mcp.md",
-    "getting-started.md",
     "best-practices.md",
     "instance/cdp.md",
+    "api-reference.md",
+    "core-concepts.md",
+    "getting-started.md",
     "Pasted image 20250427154953.png",
     "_config.yml.new",
     "sandbox-instances.md",
